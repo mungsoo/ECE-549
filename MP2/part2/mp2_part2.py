@@ -167,3 +167,6 @@ if __name__ == "__main__":
     nms_size = 10
     butterfly = cv2.imread("butterfly.jpg", 0).astype("float") / 255    
     blob_detection(butterfly, num_sigma, method="normal", threshold=threshold, nms_size=nms_size)
+
+    
+# TODO : Edge elimination, affine adaptation step to turn circular blobs into ellipses 
