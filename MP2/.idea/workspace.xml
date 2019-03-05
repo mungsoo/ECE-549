@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0a742873-d7d7-4524-a033-c5ddbcf66201" name="Default Changelist" comment="" />
+    <list default="true" id="0a742873-d7d7-4524-a033-c5ddbcf66201" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/part1/m1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/part1/m1.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/part1/m2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/part1/m2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/part1/part1_1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/part1/part1_1.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/part2/mp2_part2.py" beforeDir="false" afterPath="$PROJECT_DIR$/part2/mp2_part2.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,6 +17,7 @@
     <session id="-1381062952">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+          <entry key="project.closed" value="1" />
           <entry key="project.open.time.3" value="1" />
           <entry key="project.opened" value="1" />
         </counts>
@@ -58,11 +64,10 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="-15" />
-    <option name="y" value="-14" />
-    <option name="width" value="1938" />
-    <option name="height" value="1055" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="width" value="1937" />
+    <option name="height" value="1043" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -86,7 +91,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../ECE-422" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -116,17 +121,17 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-12" y="-11" width="1550" height="844" extended-state="0" />
+    <frame x="-5" y="0" width="1291" height="695" extended-state="0" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.33557048" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.40617386" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Python Console" sideWeight="0.49959514" visible="true" weight="0.46413502" />
+      <window_info anchor="bottom" id="Python Console" sideWeight="0.49959382" visible="true" weight="0.5871886" />
       <window_info anchor="bottom" id="Terminal" weight="0.32901296" />
-      <window_info anchor="bottom" id="Event Log" sideWeight="0.50040483" side_tool="true" weight="0.57793343" />
+      <window_info active="true" anchor="bottom" id="Event Log" sideWeight="0.50040615" side_tool="true" visible="true" weight="0.5871886" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
