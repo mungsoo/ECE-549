@@ -1,0 +1,3 @@
+./data/hill/1.jpg
+./data/hill/2.jpg
+./data/hill/3.jpg
