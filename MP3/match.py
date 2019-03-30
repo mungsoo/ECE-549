@@ -8,7 +8,7 @@ class match:
         
         def get_avg_residual(model, matches):
             def augment(data):
-                aug_data = np.ones((len(data), 3), dtype=np.int64)
+                aug_data = np.ones((len(data), 3), dtype=np.float64)
                 aug_data[:,:2] = data
                 return aug_data
             x, x_p = augment(matches[:,0]), augment(matches[:,1])
@@ -26,7 +26,7 @@ class match:
         right_keypoints, right_neighborhood_list = sift.detectAndCompute(gray_right,None)
         dist = cdist(left_neighborhood_list, right_neighborhood_list, 'sqeuclidean')
         
-        putative_match = self.stable_matching(dist, t=5000)
+        putative_match = self.stable_match(dist, t=5000)
         left_keypoints = np.array([left_keypoints[idx].pt for idx in putative_match[0]])
         right_keypoints = np.array([right_keypoints[idx].pt for idx in putative_match[1]])
         
@@ -52,7 +52,7 @@ class match:
         
         return H, inlier_idxs
     
-    def stable_matching(self, dist, t=2000):
+    def stable_match(self, dist, t=2000):
         """
         @dist: ndarray, distance matrix
         @   t: float, threshold used to eliminate matches
@@ -105,7 +105,7 @@ class match:
     
     
     
-    def ransac_homography(self, indices, threshold, max_iterations=3000):
+    def ransac_homography(self, indices, threshold, max_iterations=300000):
         '''
         @indices: a N x 2 x 2 matrix, where each line is x' and x. We want to \
         find the least square solution of lambda x' = Hx
@@ -113,7 +113,7 @@ class match:
         '''
         
         def augment(data):
-            aug_data = np.ones((len(data), 3), dtype=np.int64)
+            aug_data = np.ones((len(data), 3), dtype=np.float64)
             aug_data[:,:2] = data
             return aug_data
     
@@ -126,7 +126,7 @@ class match:
         max_num_inliers = 0
         x_p, x = augment(indices[:,0]), augment(indices[:,1])
         # Construct A
-        A = np.zeros((2*len(x), 9), dtype=np.int64)
+        A = np.zeros((2*len(x), 9), dtype=np.float64)
         for i in range(len(x)):
             A[2*i][3:] = np.hstack((x[i], -x_p[i][1]*x[i]))
             A[2*i+1][:3] = x[i]
@@ -144,7 +144,7 @@ class match:
             
             # Solve for Ah = 0
             # Construct A_sample
-            A_sample = np.zeros((8, 9), dtype=np.int64)
+            A_sample = np.zeros((8, 9), dtype=np.float64)
             for i in range(4):
                 A_sample[2*i:2*i+2] = A[2*rand_index[i]:2*rand_index[i]+2]
             
@@ -164,20 +164,20 @@ class match:
             if num_inliers > max_num_inliers:
                 max_num_inliers = num_inliers
                 optim_model = model
-                N = np.log(0.05) / np.log(1 - np.power(1-num_inliers / num_points, 4))
+                N = np.log(0.05) / np.log(1 - np.power(num_inliers / num_points, 4))
                 
             sample_count += 1
         
         
         for i in range(num_points):
-            if is_inlier(model, x[i], x_p[i]):
+            if is_inlier(optim_model, x[i], x_p[i]):
                     optim_inliers_idx.append(i)
                     
         # Refit all inliers
-        A_sample = np.zeros((2 * len(optim_inliers_idx), 9), dtype=np.int64)
+        A_sample = np.zeros((2 * len(optim_inliers_idx), 9), dtype=np.float64)
         for i in range(len(optim_inliers_idx)):
             A_sample[2*i:2*i+2] = A[2*optim_inliers_idx[i]:2*optim_inliers_idx[i]+2]
-        model = np.linalg.svd(A_sample)[-1][-1,:].reshape((3, 3))
+        optim_model = np.linalg.svd(A_sample)[-1][-1,:].reshape((3, 3))
             
         return optim_model, np.array(optim_inliers_idx)
     
