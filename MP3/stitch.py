@@ -5,7 +5,7 @@ import sys
 from match import match
 from skimage.transform import warp
 
-class Stitch:
+class stitch:
     
     def __init__(self, args):
         self.path = args
@@ -97,7 +97,7 @@ if __name__ == "__main__":
     finally:
         print("Parameters : ", args)
     
-    stitch_obj = Stitch(args)
+    stitch_obj = stitch(args)
     warped = stitch_obj.stitchn()
     plt.figure()
     plt.imshow(warped.astype("uint8"))
