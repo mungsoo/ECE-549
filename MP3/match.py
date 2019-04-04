@@ -26,15 +26,15 @@ class match:
         right_keypoints, right_neighborhood_list = sift.detectAndCompute(gray_right,None)
         dist = cdist(left_neighborhood_list, right_neighborhood_list, 'sqeuclidean')
         
-        putative_match = self.stable_match(dist, t=5000)
+        putative_match = self.stable_match(dist, t=16000)
         left_keypoints = np.array([left_keypoints[idx].pt for idx in putative_match[0]])
         right_keypoints = np.array([right_keypoints[idx].pt for idx in putative_match[1]])
         
         indices = np.stack((left_keypoints, right_keypoints), axis=1).astype("uint64")
         
         
+        H, inlier_idxs = self.ransac_homography(indices[:, [1,0]], threshold=0.5)
         # H, s = cv2.findHomography(indices[:,0], indices[:,1], cv2.RANSAC, 4)
-        H, inlier_idxs = self.ransac_homography(indices[:, [1,0]], threshold=5, max_iterations=1000)
         print("Average inliers residual :" , get_avg_residual(H, indices[inlier_idxs]))
         print("Num of inliers :", len(inlier_idxs))
         
@@ -105,7 +105,7 @@ class match:
     
     
     
-    def ransac_homography(self, indices, threshold, max_iterations=300000):
+    def ransac_homography(self, indices, threshold, max_iterations=3000000):
         '''
         @indices: a N x 2 x 2 matrix, where each line is x' and x. We want to \
         find the least square solution of lambda x' = Hx
@@ -164,7 +164,7 @@ class match:
             if num_inliers > max_num_inliers:
                 max_num_inliers = num_inliers
                 optim_model = model
-                N = np.log(0.05) / np.log(1 - np.power(num_inliers / num_points, 4))
+                N = np.log(0.01) / np.log(1 - np.power(num_inliers / num_points, 4))
                 
             sample_count += 1
         
@@ -174,10 +174,10 @@ class match:
                     optim_inliers_idx.append(i)
                     
         # Refit all inliers
-        A_sample = np.zeros((2 * len(optim_inliers_idx), 9), dtype=np.float64)
-        for i in range(len(optim_inliers_idx)):
-            A_sample[2*i:2*i+2] = A[2*optim_inliers_idx[i]:2*optim_inliers_idx[i]+2]
-        optim_model = np.linalg.svd(A_sample)[-1][-1,:].reshape((3, 3))
+        # A_sample = np.zeros((2 * len(optim_inliers_idx), 9), dtype=np.float64)
+        # for i in range(len(optim_inliers_idx)):
+            # A_sample[2*i:2*i+2] = A[2*optim_inliers_idx[i]:2*optim_inliers_idx[i]+2]
+        # optim_model = np.linalg.svd(A_sample)[-1][-1,:].reshape((3, 3))
             
         return optim_model, np.array(optim_inliers_idx)
     

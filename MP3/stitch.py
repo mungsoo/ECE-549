@@ -36,7 +36,6 @@ class stitch:
                 warped_right = warp(right_img[:, :, i].astype("float64"), np.linalg.inv(H_affine), output_shape=dsize)
                 warped_right[warped[i] != 0] = 0
                 warped[i] += warped_right
-            
             warped = warped.transpose(1, 2, 0)
             return warped
         
@@ -93,7 +92,7 @@ if __name__ == "__main__":
     try:
         args = sys.argv[1]
     except:
-        args = "file1.txt"
+        args = "files/file4.txt"
     finally:
         print("Parameters : ", args)
     
